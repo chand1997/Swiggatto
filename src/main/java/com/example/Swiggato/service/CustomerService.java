@@ -7,4 +7,6 @@ public interface CustomerService {
 
 
     CustomerResponse addCustomer(CustomerRequest customerRequest);
+
+    CustomerResponse getCustomerByMobileNo(String mobileNo);
 }

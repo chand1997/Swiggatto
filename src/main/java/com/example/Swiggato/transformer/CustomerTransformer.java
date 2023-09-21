@@ -12,6 +12,7 @@ public class CustomerTransformer {
                     .email(customerRequest.getEmail())
                     .address(customerRequest.getAddress())
                     .mobileNo(customerRequest.getMobileNo())
+                    .gender(customerRequest.getGender())
                     .build();
     }
 
