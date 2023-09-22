@@ -5,6 +5,8 @@ import com.example.Swiggato.dto.response.CartResponse;
 import com.example.Swiggato.dto.response.CustomerResponse;
 import com.example.Swiggato.model.Customer;
 
+import java.util.ArrayList;
+
 public class CustomerTransformer {
     public static Customer CustomerRequestToCustomer(CustomerRequest customerRequest){
             return Customer.builder()
@@ -13,6 +15,7 @@ public class CustomerTransformer {
                     .address(customerRequest.getAddress())
                     .mobileNo(customerRequest.getMobileNo())
                     .gender(customerRequest.getGender())
+                    .orders(new ArrayList<>())
                     .build();
     }
 
