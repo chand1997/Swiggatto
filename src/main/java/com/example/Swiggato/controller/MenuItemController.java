@@ -1,9 +1,9 @@
 package com.example.Swiggato.controller;
 
 import com.example.Swiggato.dto.response.CostliestOrCheapestFoodResponse;
-import com.example.Swiggato.dto.response.FoodResponse;
+import com.example.Swiggato.dto.response.MenuResponse;
 import com.example.Swiggato.enums.FoodCategory;
-import com.example.Swiggato.service.FoodItemService;
+import com.example.Swiggato.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +16,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/food")
-public class FoodItemController {
+public class MenuItemController {
 
-    final FoodItemService foodItemService;
+    final MenuItemService menuItemService;
 
     @Autowired
-    public FoodItemController(FoodItemService foodItemService) {
-        this.foodItemService = foodItemService;
+    public MenuItemController(MenuItemService menuItemService) {
+        this.menuItemService = menuItemService;
     }
 
     @GetMapping("/get-foods-Of-category")
     public ResponseEntity getFoodsOfCategory(@RequestParam FoodCategory foodCategory){
-        List<FoodResponse> response=foodItemService.getFoodsOfCategory(foodCategory);
+        List<MenuResponse> response= menuItemService.getFoodsOfCategory(foodCategory);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
@@ -35,7 +35,7 @@ public class FoodItemController {
     public ResponseEntity getFoodsOfParticularCategoryPriceRestaurant(@RequestParam FoodCategory foodCategory,
                                                                       @RequestParam double price,
                                                                       @RequestParam int restaurantId){
-        List<FoodResponse> response=foodItemService
+        List<MenuResponse> response= menuItemService
                 .getFoodsOfParticularCategoryPriceRestaurant(foodCategory,price,restaurantId);
         return new ResponseEntity(response, HttpStatus.OK);
     }
@@ -44,7 +44,7 @@ public class FoodItemController {
     @GetMapping("/get-veg-Or-nonVeg-from-particular-restaurant")
     public ResponseEntity getAllVegOrNonVegFoodsFromParticularRestaurant(@RequestParam boolean veg,
                                                                          @RequestParam int restaurantId){
-    List<FoodResponse>  response =foodItemService.getAllVegOrNonVegFoodsFromParticularRestaurant(veg,restaurantId);
+    List<MenuResponse>  response = menuItemService.getAllVegOrNonVegFoodsFromParticularRestaurant(veg,restaurantId);
 
     return new ResponseEntity(response,HttpStatus.OK);
     }
@@ -52,7 +52,7 @@ public class FoodItemController {
     @GetMapping("/get-five-cheapest-Or-costliest-foods-from-particular-restaurant")
     public ResponseEntity getFiveCheapestOrCostliestFoodsFromParticularRestaurant(@RequestParam boolean cheapest,
                                                                                   @RequestParam int restaurantId){
-        List<FoodResponse> response=foodItemService.
+        List<MenuResponse> response= menuItemService.
                 getFiveCheapestOrCostliestFoodsFromParticularRestaurant(cheapest,restaurantId);
         return new ResponseEntity(response,HttpStatus.OK);
     }
@@ -60,7 +60,7 @@ public class FoodItemController {
     @GetMapping("/get-five-cheapest-Or-costliest-foods-from-particular-category")
     public ResponseEntity getFiveCheapestOrCostliestFoodsFromParticularCategory(@RequestParam boolean cheapest,
                                                                                   @RequestParam FoodCategory foodCategory){
-        List<CostliestOrCheapestFoodResponse> response=foodItemService.
+        List<CostliestOrCheapestFoodResponse> response= menuItemService.
                 getFiveCheapestOrCostliestFoodsFromParticularCategory(cheapest,foodCategory);
         return new ResponseEntity(response,HttpStatus.OK);
     }

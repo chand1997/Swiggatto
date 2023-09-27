@@ -1,15 +1,15 @@
 package com.example.Swiggato.service.impl;
 
-import com.example.Swiggato.dto.request.FoodRequest;
+import com.example.Swiggato.dto.request.MenuRequest;
 import com.example.Swiggato.dto.request.RestaurantRequest;
-import com.example.Swiggato.dto.response.FoodResponse;
+import com.example.Swiggato.dto.response.MenuResponse;
 import com.example.Swiggato.dto.response.RestaurantResponse;
 import com.example.Swiggato.exception.RestaurantNoFoundException;
-import com.example.Swiggato.model.FoodItem;
+import com.example.Swiggato.model.MenuItem;
 import com.example.Swiggato.model.Restaurant;
 import com.example.Swiggato.repository.RestaurantRepository;
 import com.example.Swiggato.service.RestaurantService;
-import com.example.Swiggato.transformer.FoodItemTransformer;
+import com.example.Swiggato.transformer.MenuItemTransformer;
 import com.example.Swiggato.transformer.RestaurantTransformer;
 import com.example.Swiggato.utils.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,18 +58,18 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantResponse addFoodItemToRestaurant(FoodRequest foodRequest) {
+    public RestaurantResponse addMenuItemToRestaurant(MenuRequest menuRequest) {
 
-        if(!validationUtils.validateRestaurant(foodRequest.getRestaurantId()))
+        if(!validationUtils.validateRestaurant(menuRequest.getRestaurantId()))
             throw new RestaurantNoFoundException("Restaurant doesn't exist!!");
 
-        Restaurant restaurant=restaurantRepository.findById(foodRequest.getRestaurantId()).get();
+        Restaurant restaurant=restaurantRepository.findById(menuRequest.getRestaurantId()).get();
 
-        FoodItem foodItem= FoodItemTransformer.FoodRequestToFoodItem(foodRequest);
+        MenuItem menuItem = MenuItemTransformer.FoodRequestToFoodItem(menuRequest);
 
-        foodItem.setRestaurant(restaurant);
+        menuItem.setRestaurant(restaurant);
 
-        restaurant.getAvailableFoodItems().add(foodItem);
+        restaurant.getAvailableMenuItems().add(menuItem);
 
         Restaurant savedRestaurant =restaurantRepository.save(restaurant);
 
@@ -77,12 +77,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<FoodResponse> getMenuOfRestaurant(int id) {
+    public List<MenuResponse> getMenuOfRestaurant(int id) {
         if(!validationUtils.validateRestaurant(id)) throw new RestaurantNoFoundException("Restaurant doesn't exist");
-        List<FoodResponse> menu=restaurantRepository.findById(id).get()
-                .getAvailableFoodItems()
+        List<MenuResponse> menu=restaurantRepository.findById(id).get()
+                .getAvailableMenuItems()
                 .stream()
-                .map(foodItem -> FoodItemTransformer.FoodItemToFoodResponse(foodItem))
+                .map(foodItem -> MenuItemTransformer.FoodItemToFoodResponse(foodItem))
                 .collect(Collectors.toList());
         return menu;
     }

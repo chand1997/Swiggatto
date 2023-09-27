@@ -1,11 +1,14 @@
 package com.example.Swiggato.dto.response;
 
+
 import com.example.Swiggato.enums.FoodCategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+//@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -15,6 +18,9 @@ public class FoodResponse {
 
     double price;
 
+    FoodCategory category;
 
-    FoodCategory foodCategory;
+    boolean veg;
+
+    int quantityAdded;
 }

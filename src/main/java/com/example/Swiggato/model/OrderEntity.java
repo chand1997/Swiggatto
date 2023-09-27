@@ -10,7 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +26,7 @@ public class OrderEntity {
 
    String orderId;
 
-   int orderTotal;
+   double orderTotal;
 
    @CreationTimestamp
    Date orderTime;
@@ -42,5 +44,7 @@ public class OrderEntity {
    Restaurant restaurant;
 
    @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.ALL)
-   List<FoodItem> foodItems=new ArrayList<>();
+   List<FoodItem> foodItemList=new ArrayList<>();
+
+
 }

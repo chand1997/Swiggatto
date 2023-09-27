@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +34,8 @@ public class DeliveryPartner {
 
     @Enumerated(EnumType.STRING)
     Gender gender;
+
+    Boolean available;
 
     @OneToMany(mappedBy = "deliveryPartner",cascade = CascadeType.ALL)
     List<OrderEntity> orders=new ArrayList<>();

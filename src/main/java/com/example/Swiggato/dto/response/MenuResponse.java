@@ -1,5 +1,6 @@
 package com.example.Swiggato.dto.response;
 
+import com.example.Swiggato.enums.FoodCategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,14 +11,12 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CustomerResponse {
+public class MenuResponse {
 
-    String name;
+    String dishName;
+
+    double price;
 
 
-    String email;
-
-    String address;
-
-    CartResponse cart;
+    FoodCategory foodCategory;
 }

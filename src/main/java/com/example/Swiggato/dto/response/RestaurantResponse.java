@@ -6,7 +6,9 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+//@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -22,5 +24,5 @@ public class RestaurantResponse {
     boolean opened;
 
 
-    List<FoodResponse> menu;
+    List<MenuResponse> menu;
 }

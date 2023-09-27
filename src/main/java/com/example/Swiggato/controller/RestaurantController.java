@@ -1,8 +1,8 @@
 package com.example.Swiggato.controller;
 
-import com.example.Swiggato.dto.request.FoodRequest;
+import com.example.Swiggato.dto.request.MenuRequest;
 import com.example.Swiggato.dto.request.RestaurantRequest;
-import com.example.Swiggato.dto.response.FoodResponse;
+import com.example.Swiggato.dto.response.MenuResponse;
 import com.example.Swiggato.dto.response.RestaurantResponse;
 import com.example.Swiggato.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +35,16 @@ public class RestaurantController{
         return restaurantService.changeOpenedStatus(id);
     }
 
-    @PostMapping("/add-foodItem")
-    public ResponseEntity addFoodItemToRestaurant(@RequestBody FoodRequest addFoodToMenuRequest){
-       RestaurantResponse restaurantResponse= restaurantService.addFoodItemToRestaurant(addFoodToMenuRequest);
+    @PostMapping("/add-menuItem")
+    public ResponseEntity addMenuItemToRestaurant(@RequestBody MenuRequest addFoodToMenuRequest){
+       RestaurantResponse restaurantResponse= restaurantService.addMenuItemToRestaurant(addFoodToMenuRequest);
        return new ResponseEntity(restaurantResponse,HttpStatus.CREATED);
     }
 
 
     @GetMapping("/get-menu")
     public ResponseEntity getMenuOfRestaurant(@RequestParam int id){
-        List<FoodResponse> menu=restaurantService.getMenuOfRestaurant(id);
+        List<MenuResponse> menu=restaurantService.getMenuOfRestaurant(id);
         return new ResponseEntity(menu,HttpStatus.FOUND);
     }
 

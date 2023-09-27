@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+//@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class CartResponse {
 
-    int cartTotal;
+    double cartTotal;
 
-    List<FoodResponse> food=new ArrayList<>();
+    List<MenuResponse> food=new ArrayList<>();
 }
