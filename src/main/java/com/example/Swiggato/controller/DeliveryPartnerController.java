@@ -5,10 +5,7 @@ import com.example.Swiggato.service.DeliveryPartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/partner")
@@ -25,6 +22,12 @@ public class DeliveryPartnerController {
     public ResponseEntity addPartner(@RequestBody DeliveryPartnerRequest deliveryPartnerRequest){
         deliveryPartnerService.addPartner(deliveryPartnerRequest);
         return new ResponseEntity("DeliveryPartner added", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-partner-with-most-deliveries")
+    public ResponseEntity getPartnerWithMostDeliveries(){
+       String message=deliveryPartnerService.getPartnerWithMostDeliveries();
+       return new ResponseEntity(message,HttpStatus.FOUND);
     }
 
 }

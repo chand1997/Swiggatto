@@ -49,23 +49,17 @@ public class RestaurantController{
     }
 
 
+    @GetMapping("/get-restaurants-with-more-than-given-noOfOrders")
+    public ResponseEntity getAllRestaurantsWithMoreThanGivenOrders(@RequestParam int noOfOrders){
+      List<String> restaurantNames=restaurantService.getAllRestaurantsWithMoreThanGivenOrders(noOfOrders);
+      return new ResponseEntity(restaurantNames,HttpStatus.FOUND);
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @GetMapping("/get-open-restaurants-with-most-meuItems")
+    public ResponseEntity getRestaurantsOpenedWithMostMenuItems(){
+     List<String>  restaurants=restaurantService.getRestaurantsOpenedWithMostMenuItems();
+     return new ResponseEntity(restaurants,HttpStatus.FOUND);
+    }
 
 }

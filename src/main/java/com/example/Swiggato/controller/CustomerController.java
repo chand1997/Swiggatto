@@ -32,4 +32,17 @@ public class CustomerController {
 
 
        }
+
+
+       @GetMapping("/get-customer-with-most-orders")
+       public ResponseEntity getCustomerWithMostOrders(){
+             String message= customerService.getCustomerWithMostOrders();
+             return new ResponseEntity(message,HttpStatus.FOUND);
+       }
+
+       @GetMapping("/get-female-customer-with-least-orders")
+       public ResponseEntity getFemaleCustomerWithLeastOrders(){
+              String message=customerService.getFemaleCustomerWithLeastOrders();
+              return new ResponseEntity(message,HttpStatus.FOUND);
+       }
 }

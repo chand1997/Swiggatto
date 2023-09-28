@@ -86,4 +86,18 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .collect(Collectors.toList());
         return menu;
     }
+
+    @Override
+    public List<String> getAllRestaurantsWithMoreThanGivenOrders(int noOfOrders) {
+      List<String>  restaurants=restaurantRepository.getAllRestaurantsWithMoreThanGivenOrders(noOfOrders);
+      if(restaurants.isEmpty()) throw new RestaurantNoFoundException("no restaurants are added in db");
+        return restaurants;
+    }
+
+    @Override
+    public List<String> getRestaurantsOpenedWithMostMenuItems() {
+        List<String>  restaurants=restaurantRepository.getRestaurantsOpenedWithMostMenuItems();
+        if(restaurants.isEmpty()) throw new RestaurantNoFoundException("no restaurants are added in db");
+        return restaurants;
+    }
 }

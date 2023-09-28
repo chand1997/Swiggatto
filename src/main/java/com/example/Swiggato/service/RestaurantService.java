@@ -16,4 +16,8 @@ public interface RestaurantService {
     RestaurantResponse addMenuItemToRestaurant(MenuRequest addFoodToMenuRequest);
 
     List<MenuResponse> getMenuOfRestaurant(int id);
+
+    List<String> getAllRestaurantsWithMoreThanGivenOrders(int noOfOrders);
+
+    List<String> getRestaurantsOpenedWithMostMenuItems();
 }

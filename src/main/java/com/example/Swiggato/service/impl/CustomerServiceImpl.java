@@ -2,6 +2,7 @@ package com.example.Swiggato.service.impl;
 
 import com.example.Swiggato.dto.request.CustomerRequest;
 import com.example.Swiggato.dto.response.CustomerResponse;
+import com.example.Swiggato.enums.Gender;
 import com.example.Swiggato.exception.CustomerNotFoundException;
 import com.example.Swiggato.model.Cart;
 import com.example.Swiggato.model.Customer;
@@ -47,5 +48,22 @@ public class CustomerServiceImpl implements CustomerService {
        Optional<Customer> optionalCustomer=customerRepository.findByMobileNo(mobileNo);
        if(optionalCustomer.isEmpty()) throw new CustomerNotFoundException("Wrong Mobile Number");
        return CustomerTransformer.CustomerToCustomerResponse(optionalCustomer.get());
+    }
+
+    @Override
+    public String getCustomerWithMostOrders() {
+          Optional<Customer>  optionalCustomer=customerRepository.getCustomerWithMostOrders();
+          if(optionalCustomer.isEmpty()) throw new CustomerNotFoundException("no customer is added in db");
+          Customer customer=optionalCustomer.get();
+        return customer.getName()+" has most orders i.e "+customer.getOrders().size();
+    }
+
+    @Override
+    public String getFemaleCustomerWithLeastOrders() {
+       Optional<Customer> optionalCustomer=customerRepository.getCustomerWithLeastOrdersByGender(Gender.FEMALE);
+       if(optionalCustomer.isEmpty()) throw new CustomerNotFoundException("no customer found or no female customer found");
+        Customer customer=optionalCustomer.get();
+        return customer.getName()+" female customer with least orders i.e "+customer.getOrders().size();
+
     }
 }
